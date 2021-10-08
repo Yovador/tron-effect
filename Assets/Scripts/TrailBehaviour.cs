@@ -7,31 +7,30 @@ public class TrailBehaviour : MonoBehaviour
     [SerializeField, Range(2, 100)]
     private int pointNumber;
     public GameObject anchoredMoto { get; set; }
-    private List<Vector3> testPointList = new List<Vector3>();
-
-    private void Start()
-    {
-        testPointList.Add(new Vector3(1, 1, 0));
-        testPointList.Add(new Vector3(3, 2, 0));
-        testPointList.Add(new Vector3(-2, 3, 0));
-        testPointList.Add(new Vector3(0, 4, 0));
+    public List<Vector3> pointList { get; set; } = new List<Vector3>();
 
 
-    }
     private void OnDrawGizmos()
     {
-        if (testPointList.Count > 0)
+        if (pointList.Count > 0)
         {
-            foreach (var circlePos in testPointList)
+            List<Vector3> usablePointList = new List<Vector3>();
+            foreach (var point in pointList)
+            {
+                usablePointList.Add(point);
+            }
+            usablePointList.Add(anchoredMoto.transform.position);
+            foreach (var circlePos in usablePointList)
             {
                 Gizmos.color = Color.red;
                 Gizmos.DrawSphere(circlePos, 0.1f);
             }
-            foreach (var circlePos in GetEvenlySpacedPoint(testPointList))
+            foreach (var circlePos in GetEvenlySpacedPoint(usablePointList))
             {
                 Gizmos.color = Color.blue;
                 Gizmos.DrawSphere(circlePos, 0.05f);
             }
+
         }
     }
 
@@ -48,7 +47,6 @@ public class TrailBehaviour : MonoBehaviour
                 float spaceBetweenPoint = directionVector.magnitude / pointNumber;
                 for (int j = 0; j < pointNumber; j++)
                 {
-                    Debug.Log(i);
                     Vector3 newPoint = pointList[i - 1] + (directionVector.normalized * spaceBetweenPoint*j);
                     evenlyPoint.Add(newPoint);
 

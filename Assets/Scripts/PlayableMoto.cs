@@ -30,17 +30,6 @@ public class PlayableMoto : MonoBehaviour
     private void Update()
     {
         Move();
-        //TEST ONLY
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Turn(90);
-        }
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            ToggleBoost();
-        }
-
-
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -55,9 +44,9 @@ public class PlayableMoto : MonoBehaviour
     private void Move()
     {
         float distanceToTravel = (moveSpeed + (boostValue * Convert.ToSingle(isBoostOn)) ) * Time.deltaTime;
-        Vector3 movementVector = transform.forward * distanceToTravel;
+        Vector3 movementVector = transform.worldToLocalMatrix * transform.forward * distanceToTravel;
         transform.localPosition += movementVector;
-
+        CreateTrail();
     }
 
 
@@ -69,6 +58,7 @@ public class PlayableMoto : MonoBehaviour
 
     private void CreateTrail()
     {
+        trail.pointList = trailTurnPoint;
     }
 
     protected void Turn(float turnValue)
