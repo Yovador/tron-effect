@@ -10,14 +10,21 @@ public class Player : PlayableMoto
 
     public void OnMove(InputValue input)
     {
-        Debug.Log("On Move");
         Vector2 inputVec = input.Get<Vector2>();
+        Debug.Log("On Move : " + inputVec );
 
-        if(inputVec.x <= -1 && inputVec.x > (-1 - (-moveSensibility) ) )
+        if(inputVec.x >= -1 && inputVec.x < 0)
         {
-            Debug.Log("Left");
+            Turn(-90);
         }
-        
+        if (inputVec.x <= 1 && inputVec.x > 0)
+        {
+            Turn(90);
+        }
     }
 
+    public void OnBoost()
+    {
+        ToggleBoost();
+    }
 }

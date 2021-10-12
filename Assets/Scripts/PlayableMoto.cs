@@ -7,7 +7,20 @@ using UnityEngine;
 public class PlayableMoto : MonoBehaviour
 {
     [SerializeField]
-    Color neon;
+    private Color NeonColor;
+    public Color neonColor { 
+        get { 
+            return NeonColor; 
+        }
+        set
+        {
+            NeonColor = neonColor;
+        }
+    }
+
+    [SerializeField, Range(0.1f, 100)]
+    private float neonIntensity;
+
     [SerializeField]
     float moveSpeed;
     [SerializeField]
@@ -16,20 +29,22 @@ public class PlayableMoto : MonoBehaviour
     bool isBoostOn = false;
     public bool isAlive { get; set; }  = true;
     List<Vector3> trailTurnPoint = new List<Vector3>() ;
-
     TrailBehaviour trail;
+    public bool hasStartedMoving { get; set; } = false;
 
     private void Start()
     {
-        trailTurnPoint.Add(transform.position);
         trail = GetComponentInChildren<TrailBehaviour>();
+        trailTurnPoint.Add(trail.transform.position);
         trail.anchoredMoto = gameObject;
+        trail.pointList = trailTurnPoint;
     }
 
 
     private void Update()
     {
         Move();
+        UpdateColor();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -41,12 +56,18 @@ public class PlayableMoto : MonoBehaviour
         }
     }
 
+
     private void Move()
     {
         float distanceToTravel = (moveSpeed + (boostValue * Convert.ToSingle(isBoostOn)) ) * Time.deltaTime;
-        Vector3 movementVector = transform.worldToLocalMatrix * transform.forward * distanceToTravel;
-        transform.localPosition += movementVector;
-        CreateTrail();
+        Vector3 movementVector = transform.forward * distanceToTravel;
+        transform.position += movementVector;
+        Debug.DrawRay(transform.position, transform.forward * 20, Color.yellow);
+
+        if (!hasStartedMoving)
+        {
+            hasStartedMoving = true;
+        }
     }
 
 
@@ -54,23 +75,33 @@ public class PlayableMoto : MonoBehaviour
     {
         isAlive = false;
         Debug.Log(gameObject.name + " is dead. long live " + gameObject.name + ".");
+        Destroy(gameObject);
     }
 
-    private void CreateTrail()
-    {
-        trail.pointList = trailTurnPoint;
-    }
 
     protected void Turn(float turnValue)
     {
-        trailTurnPoint.Add(transform.position);
         Vector3 currentAngle = transform.localRotation.eulerAngles;
 
         Vector3 targetAngle = currentAngle;
         targetAngle.y += turnValue;
 
         transform.localRotation = Quaternion.Euler(targetAngle);
+        transform.position += transform.forward * Vector3.Distance(transform.position, trail.transform.position);
+        trailTurnPoint.Add(trail.transform.position);
+        trail.pointList = trailTurnPoint;
+        trail.AddTrail((int)turnValue);
 
+    }
+
+    private void UpdateColor()
+    {
+        List<GameObject> neonObjs = new List<GameObject>(GameObject.FindGameObjectsWithTag("hasNeon"));
+
+        foreach (var obj in neonObjs)
+        {
+            obj.GetComponent<MeshRenderer>().materials[1].SetColor("_EmissionColor", neonColor * neonIntensity);
+        }
     }
 
     protected void ToggleBoost()
