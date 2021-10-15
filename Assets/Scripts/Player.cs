@@ -5,22 +5,13 @@ using UnityEngine.InputSystem;
 
 public class Player : PlayableMoto
 {
-    [SerializeField, Range(0,1)]
-    float moveSensibility = 0.2f; 
-
-    public void OnMove(InputValue input)
+    public void OnTurnLeft()
     {
-        Vector2 inputVec = input.Get<Vector2>();
-        Debug.Log("On Move : " + inputVec );
-
-        if(inputVec.x >= -1 && inputVec.x < 0)
-        {
-            Turn(-90);
-        }
-        if (inputVec.x <= 1 && inputVec.x > 0)
-        {
-            Turn(90);
-        }
+        Turn(-90);
+    }
+    public void OnTurnRight()
+    {
+        Turn(90);
     }
 
     public void OnBoost()

@@ -8,12 +8,6 @@ public class TrailBehaviour : MonoBehaviour
 
     [SerializeField, Range(0.1f, 100)]
     private float neonTrailIntensity = 1;
-    
-    private int pointNumber = 2;
-    [SerializeField, Range(0, 1)]
-    private float trailWidth = 0.5f;
-    [SerializeField, Range(0, 2)]
-    private float trailHeigth = 0.5f;
     [SerializeField]
     private GameObject trailPrefab;
     private List<GameObject> trailList = new List<GameObject>();
@@ -23,20 +17,28 @@ public class TrailBehaviour : MonoBehaviour
     private int currentAngle = 0;
     //private List<Vector3> testList = new List<Vector3>() { new Vector3(1,0,0), new Vector3(1, 0, 0) };s
 
+    [Obsolete("This variable has nos more use in the current state of the game. (yes I just wanted to try a deprecated method)")]
+    private int evenlyPointNumber = 2;
+
     private void Update()
     {
         if (anchoredMoto.GetComponent<PlayableMoto>().hasStartedMoving)
         {
 
             UpdateCube();
-            UpdateNeon();
+            foreach (var obj in trailList)
+            {
+
+                UpdateNeon(obj);
+            }
         }
+
         
     }
 
     private void OnDrawGizmos()
     {
-        if (pointList.Count > 0)
+        /*if (pointList.Count > 0)
         {
             List<Vector3> usablePointList = new List<Vector3>();
             foreach (var point in pointList)
@@ -53,12 +55,12 @@ public class TrailBehaviour : MonoBehaviour
             {
                 Gizmos.color = Color.blue;
                 Gizmos.DrawSphere(circlePos, 0.05f);
-            }*/
+            }
 
-        }
+        }*/
     }
 
-    [Obsolete("This method has nos more use in the current state of the game (yes I just wanted to try a deprecated method)")]
+    [Obsolete("This method has nos more use in the current state of the game. (yes I just wanted to try a deprecated method)")]
     private List<Vector3> GetEvenlySpacedPoint(List<Vector3> pointList )
     {
         List<Vector3> evenlyPoint = new List<Vector3>();
@@ -69,8 +71,8 @@ public class TrailBehaviour : MonoBehaviour
             if(i > 0)
             {
                 Vector3 directionVector = currentPoint - pointList[i - 1];
-                float spaceBetweenPoint = directionVector.magnitude / pointNumber;
-                for (int j = 0; j < pointNumber; j++)
+                float spaceBetweenPoint = directionVector.magnitude / evenlyPointNumber;
+                for (int j = 0; j < evenlyPointNumber; j++)
                 {
                     Vector3 newPoint = pointList[i - 1] + (directionVector.normalized * spaceBetweenPoint*j);
                     evenlyPoint.Add(newPoint);
@@ -91,13 +93,6 @@ public class TrailBehaviour : MonoBehaviour
     {
         List<Vector3> points = new List<Vector3>(pointList);
         points.Add(transform.position);
-        Debug.Log("Update Cube : " + points.Count + " / " + trailList.Count);
-
-
-        foreach (var point in points)
-        {
-            Debug.Log("Point : " + point);
-        }
 
         if(trailList.Count == 0)
         {
@@ -124,9 +119,9 @@ public class TrailBehaviour : MonoBehaviour
         currentAngle += newAngle;
     }
 
-    private void UpdateNeon()
+    private void UpdateNeon(GameObject gameObject)
     {
-        trailPrefab.GetComponent<MeshRenderer>().sharedMaterial.SetColor("_EmissionColor", anchoredMoto.GetComponent<PlayableMoto>().neonColor * neonTrailIntensity);
+        gameObject.GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", anchoredMoto.GetComponent<PlayableMoto>().neonColor * neonTrailIntensity);
     }
 
     private void ResizeTrail(GameObject obj, Vector3 firstPoint, Vector3 secondPoint, bool rotate = true)
@@ -141,7 +136,6 @@ public class TrailBehaviour : MonoBehaviour
             obj.transform.localRotation = Quaternion.Euler(0, currentAngle, 0);
         }
 
-        Debug.Log("Wall position : " + obj.transform.position + " scale : " + obj.transform.localScale + " rotation " + obj.transform.localRotation);
         
     }
 }

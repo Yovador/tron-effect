@@ -32,7 +32,7 @@ public class PlayableMoto : MonoBehaviour
     TrailBehaviour trail;
     public bool hasStartedMoving { get; set; } = false;
 
-    private void Start()
+    virtual protected void Start()
     {
         trail = GetComponentInChildren<TrailBehaviour>();
         trailTurnPoint.Add(trail.transform.position);
@@ -41,7 +41,7 @@ public class PlayableMoto : MonoBehaviour
     }
 
 
-    private void Update()
+    virtual protected void Update()
     {
         Move();
         UpdateColor();
@@ -62,7 +62,6 @@ public class PlayableMoto : MonoBehaviour
         float distanceToTravel = (moveSpeed + (boostValue * Convert.ToSingle(isBoostOn)) ) * Time.deltaTime;
         Vector3 movementVector = transform.forward * distanceToTravel;
         transform.position += movementVector;
-        Debug.DrawRay(transform.position, transform.forward * 20, Color.yellow);
 
         if (!hasStartedMoving)
         {
@@ -79,7 +78,7 @@ public class PlayableMoto : MonoBehaviour
     }
 
 
-    protected void Turn(float turnValue)
+    virtual protected void Turn(float turnValue)
     {
         Vector3 currentAngle = transform.localRotation.eulerAngles;
 
@@ -96,16 +95,35 @@ public class PlayableMoto : MonoBehaviour
 
     private void UpdateColor()
     {
-        List<GameObject> neonObjs = new List<GameObject>(GameObject.FindGameObjectsWithTag("hasNeon"));
-
-        foreach (var obj in neonObjs)
+        foreach (var obj in FindChildrenWithTag(gameObject, "hasNeon"))
         {
+
             obj.GetComponent<MeshRenderer>().materials[1].SetColor("_EmissionColor", neonColor * neonIntensity);
+            
         }
+
     }
 
     protected void ToggleBoost()
     {
         isBoostOn = !isBoostOn;
+    }
+
+    public static List<GameObject> FindChildrenWithTag(GameObject obj, string tag)
+    {
+        List<GameObject> result = new List<GameObject>();
+
+        foreach (Transform child in obj.transform)
+        {
+            GameObject childObj = child.gameObject;
+            if (childObj.CompareTag(tag))
+            {
+                result.Add(childObj);
+            }
+            result.AddRange(FindChildrenWithTag(childObj, tag));
+
+        }
+
+        return result;
     }
 }
