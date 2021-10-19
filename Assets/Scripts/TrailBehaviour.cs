@@ -20,6 +20,7 @@ public class TrailBehaviour : MonoBehaviour
     [Obsolete("This variable has nos more use in the current state of the game. (yes I just wanted to try a deprecated method)")]
     private int evenlyPointNumber = 2;
 
+
     private void Update()
     {
         if (anchoredMoto.GetComponent<PlayableMoto>().hasStartedMoving)
@@ -38,19 +39,16 @@ public class TrailBehaviour : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        /*if (pointList.Count > 0)
+        if (pointList.Count > 0)
         {
-            List<Vector3> usablePointList = new List<Vector3>();
-            foreach (var point in pointList)
-            {
-                usablePointList.Add(point);
-            }
-            usablePointList.Add(anchoredMoto.transform.position);
+            List<Vector3> usablePointList = new List<Vector3>(pointList);
+            usablePointList.Add(transform.position);
             foreach (var circlePos in usablePointList)
             {
                 Gizmos.color = Color.red;
-                Gizmos.DrawSphere(circlePos, 0.1f);
+                Gizmos.DrawSphere(circlePos, 0.1f * anchoredMoto.GetComponent<PlayableMoto>().parentScale);
             }
+        }
             /*foreach (var circlePos in GetEvenlySpacedPoint(usablePointList))
             {
                 Gizmos.color = Color.blue;
@@ -128,7 +126,7 @@ public class TrailBehaviour : MonoBehaviour
     {
 
         Vector3 forward = secondPoint - firstPoint;
-        float magnitude = Mathf.Abs(forward.magnitude);
+        float magnitude = Mathf.Abs(forward.magnitude / anchoredMoto.GetComponent<PlayableMoto>().parentScale);
         obj.transform.position = (firstPoint + secondPoint) / 2;
         obj.transform.localScale = new Vector3(obj.transform.localScale.x, obj.transform.localScale.y, magnitude + obj.transform.localScale.x);
         if (rotate)

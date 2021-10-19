@@ -6,11 +6,20 @@ public class ComputerControlledMoto : PlayableMoto
 {
 
     [SerializeField, Range(1, 100)]
-    int turnLuck;
-    [SerializeField, Range(0.1f, 5f)]
+    int turnLuck = 1;
+    [SerializeField, Range(1, 100)]
+    int boostLuck = 1;
+    [SerializeField, Range(0, 5)]
+    float minBoostTime = 1f;
+    [SerializeField, Range(0, 5)]
+    float maxBoostTime = 5f;
+    [SerializeField, Range(0f, 5f)]
     float detectionRange = 1f;
     List<GameObject> raycastSources;
+    [SerializeField, Range(0f, 0.2f)]
+    float detectionOffset;
     private enum Side { Forward, Left, Right }
+    
     protected override void Start()
     {
         base.Start();
@@ -21,11 +30,11 @@ public class ComputerControlledMoto : PlayableMoto
 
         foreach (var rayOriginObj in raycastSources)
         {
-            Vector3 direction = rayOriginObj.transform.forward * detectionRange;
+            Vector3 direction = parentScale * (rayOriginObj.transform.forward * detectionRange + rayOriginObj.transform.forward * detectionOffset);
             BoxCollider collider = GetComponent<BoxCollider>();
             Debug.DrawRay(GetOriginOfRay(rayOriginObj), direction, Color.gray, 10f);
-            Debug.DrawRay(GetOriginOfRay(rayOriginObj, collider.size.z/2), direction, Color.blue, 10f);
-            Debug.DrawRay(GetOriginOfRay(rayOriginObj, -collider.size.z/2), direction, Color.magenta, 10f);
+            Debug.DrawRay(GetOriginOfRay(rayOriginObj, parentScale * collider.size.z/2), direction, Color.blue, 10f);
+            Debug.DrawRay(GetOriginOfRay(rayOriginObj, -parentScale * collider.size.z/2), direction, Color.magenta, 10f);
         }
 
 
@@ -83,7 +92,19 @@ public class ComputerControlledMoto : PlayableMoto
             Debug.Log("Turning because of random");
             TurnSequence();
         }
+        if(Random.Range(1, 100) <= boostLuck && !IsBoostOn)
+        {
+            StartCoroutine(BoostSequence(Random.Range(minBoostTime, maxBoostTime)));
+        }
     
+    }
+
+    private IEnumerator BoostSequence(float timeToWait)
+    {
+        Debug.Log("BOOSTING !!!!!");
+        ToggleBoost();
+        yield return new WaitForSecondsRealtime(timeToWait);
+        ToggleBoost();
     }
 
     private void TurnSequence()
@@ -156,7 +177,7 @@ public class ComputerControlledMoto : PlayableMoto
     {
         bool result;
         BoxCollider collider = GetComponent<BoxCollider>();
-        float offset = (collider.size.z / 2) + (collider.size.z / 5);
+        float offset = parentScale * ( (collider.size.z / 2) + (collider.size.z / 5) );
         bool firstRayResult;
         GetDistanceFromWall(side, out firstRayResult, offset);
         bool secondRayResult;
@@ -184,9 +205,9 @@ public class ComputerControlledMoto : PlayableMoto
                 color = Color.green;
                 break;
         }
-        Vector3 direction = rayOriginObj.transform.forward * detectionRange;
+        Vector3 direction = parentScale * (rayOriginObj.transform.forward * detectionRange + rayOriginObj.transform.forward * detectionOffset );
 
-        hasTouched = Physics.Raycast(GetOriginOfRay(rayOriginObj, offset), direction, out hit, detectionRange, layerMask);
+        hasTouched = Physics.Raycast(GetOriginOfRay(rayOriginObj, offset), direction, out hit, direction.magnitude, layerMask);
         Debug.DrawRay(GetOriginOfRay(rayOriginObj, offset), direction, color, Time.deltaTime);
         return hit.distance;
     }

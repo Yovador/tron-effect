@@ -8,9 +8,11 @@ public class PlayableMoto : MonoBehaviour
 {
     [SerializeField]
     private Color NeonColor;
-    public Color neonColor { 
-        get { 
-            return NeonColor; 
+    public Color neonColor
+    {
+        get
+        {
+            return NeonColor;
         }
         set
         {
@@ -27,17 +29,25 @@ public class PlayableMoto : MonoBehaviour
     float boostValue;
 
     bool isBoostOn = false;
-    public bool isAlive { get; set; }  = true;
-    List<Vector3> trailTurnPoint = new List<Vector3>() ;
+    protected bool IsBoostOn { get { return isBoostOn; } }
+    public bool isAlive { get; set; } = true;
+    List<Vector3> trailTurnPoint = new List<Vector3>();
     TrailBehaviour trail;
     public bool hasStartedMoving { get; set; } = false;
+    public float parentScale { get; set; }
+
+    private void Awake()
+    {
+        parentScale = transform.parent.localScale.x;
+        trail = GetComponentInChildren<TrailBehaviour>();
+        trail.anchoredMoto = gameObject;
+        trailTurnPoint.Add(trail.transform.position);
+        trail.pointList = trailTurnPoint;
+    }
 
     virtual protected void Start()
     {
-        trail = GetComponentInChildren<TrailBehaviour>();
-        trailTurnPoint.Add(trail.transform.position);
-        trail.anchoredMoto = gameObject;
-        trail.pointList = trailTurnPoint;
+
     }
 
 
@@ -49,7 +59,7 @@ public class PlayableMoto : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Collide");
+        Debug.Log("Collide with " + collision.collider.name);
         if (collision.collider.CompareTag("Wall"))
         {
             Die();
@@ -59,7 +69,8 @@ public class PlayableMoto : MonoBehaviour
 
     private void Move()
     {
-        float distanceToTravel = (moveSpeed + (boostValue * Convert.ToSingle(isBoostOn)) ) * Time.deltaTime;
+        float distanceToTravel = (parentScale * (moveSpeed + (boostValue * Convert.ToSingle(isBoostOn)))) * Time.deltaTime;
+        Debug.Log("Distance to travel : " + distanceToTravel + " / " + transform.parent.localScale.x);
         Vector3 movementVector = transform.forward * distanceToTravel;
         transform.position += movementVector;
 
@@ -97,9 +108,9 @@ public class PlayableMoto : MonoBehaviour
     {
         foreach (var obj in FindChildrenWithTag(gameObject, "hasNeon"))
         {
-
+            Debug.Log("Changing color of " + obj.name + " from " + gameObject.name);
             obj.GetComponent<MeshRenderer>().materials[1].SetColor("_EmissionColor", neonColor * neonIntensity);
-            
+
         }
 
     }
