@@ -29,7 +29,6 @@ public class TrailBehaviour : MonoBehaviour
             UpdateCube();
             foreach (var obj in trailList)
             {
-
                 UpdateNeon(obj);
             }
         }
@@ -135,5 +134,15 @@ public class TrailBehaviour : MonoBehaviour
         }
 
         
+    }
+
+    public void ResetTrail()
+    {
+        currentAngle = 0;
+        foreach ( var obj in trailList)
+        {
+            Destroy(obj);
+        }
+        trailList = new List<GameObject>();
     }
 }

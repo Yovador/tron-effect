@@ -35,21 +35,22 @@ public class PlayableMoto : MonoBehaviour
     TrailBehaviour trail;
     public bool hasStartedMoving { get; set; } = false;
     public float parentScale { get; set; }
+    private Vector3 startingPos;
+    private Quaternion startingRotation;
 
     private void Awake()
     {
         parentScale = transform.parent.localScale.x;
         trail = GetComponentInChildren<TrailBehaviour>();
         trail.anchoredMoto = gameObject;
-        trailTurnPoint.Add(trail.transform.position);
-        trail.pointList = trailTurnPoint;
+        UpdateTrailPath();
+        startingPos = transform.localPosition;
+        startingRotation = transform.localRotation;
     }
 
-    virtual protected void Start()
+    protected virtual void Start()
     {
-
     }
-
 
     virtual protected void Update()
     {
@@ -70,7 +71,6 @@ public class PlayableMoto : MonoBehaviour
     private void Move()
     {
         float distanceToTravel = (parentScale * (moveSpeed + (boostValue * Convert.ToSingle(isBoostOn)))) * Time.deltaTime;
-        Debug.Log("Distance to travel : " + distanceToTravel + " / " + transform.parent.localScale.x);
         Vector3 movementVector = transform.forward * distanceToTravel;
         transform.position += movementVector;
 
@@ -83,9 +83,12 @@ public class PlayableMoto : MonoBehaviour
 
     private void Die()
     {
-        isAlive = false;
         Debug.Log(gameObject.name + " is dead. long live " + gameObject.name + ".");
-        Destroy(gameObject);
+        StopAllCoroutines();
+        isBoostOn = false;
+        isAlive = false;
+        GameManager.instance.EndRound();
+
     }
 
 
@@ -98,21 +101,35 @@ public class PlayableMoto : MonoBehaviour
 
         transform.localRotation = Quaternion.Euler(targetAngle);
         transform.position += transform.forward * Vector3.Distance(transform.position, trail.transform.position);
-        trailTurnPoint.Add(trail.transform.position);
-        trail.pointList = trailTurnPoint;
+        UpdateTrailPath();
         trail.AddTrail((int)turnValue);
 
     }
 
     private void UpdateColor()
     {
-        foreach (var obj in FindChildrenWithTag(gameObject, "hasNeon"))
+        foreach (var obj in YovaUtilities.FindChildrenWithTag(gameObject, "hasNeon"))
         {
-            Debug.Log("Changing color of " + obj.name + " from " + gameObject.name);
             obj.GetComponent<MeshRenderer>().materials[1].SetColor("_EmissionColor", neonColor * neonIntensity);
-
         }
 
+    }
+
+    public void ResetMoto()
+    {
+        trail.ResetTrail();
+        transform.localPosition = startingPos;
+        transform.localRotation = startingRotation;
+        trailTurnPoint = new List<Vector3>();
+        UpdateTrailPath();
+        isAlive = true;
+
+    }
+
+    private void UpdateTrailPath()
+    {
+        trailTurnPoint.Add(trail.transform.position);
+        trail.pointList = trailTurnPoint;
     }
 
     protected void ToggleBoost()
@@ -120,21 +137,5 @@ public class PlayableMoto : MonoBehaviour
         isBoostOn = !isBoostOn;
     }
 
-    public static List<GameObject> FindChildrenWithTag(GameObject obj, string tag)
-    {
-        List<GameObject> result = new List<GameObject>();
-
-        foreach (Transform child in obj.transform)
-        {
-            GameObject childObj = child.gameObject;
-            if (childObj.CompareTag(tag))
-            {
-                result.Add(childObj);
-            }
-            result.AddRange(FindChildrenWithTag(childObj, tag));
-
-        }
-
-        return result;
-    }
+   
 }

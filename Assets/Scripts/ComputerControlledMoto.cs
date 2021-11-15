@@ -23,7 +23,7 @@ public class ComputerControlledMoto : PlayableMoto
     protected override void Start()
     {
         base.Start();
-        raycastSources = FindChildrenWithTag(gameObject, "RaycastSource");
+        raycastSources = YovaUtilities.FindChildrenWithTag(gameObject, "RaycastSource");
         raycastSources[(int)Side.Forward].transform.localRotation = Quaternion.Euler(Vector3.zero);
         raycastSources[(int)Side.Left].transform.localRotation = Quaternion.Euler(0, -90, 0);
         raycastSources[(int)Side.Right].transform.localRotation = Quaternion.Euler(0, 90, 0);
@@ -33,8 +33,8 @@ public class ComputerControlledMoto : PlayableMoto
             Vector3 direction = parentScale * (rayOriginObj.transform.forward * detectionRange + rayOriginObj.transform.forward * detectionOffset);
             BoxCollider collider = GetComponent<BoxCollider>();
             Debug.DrawRay(GetOriginOfRay(rayOriginObj), direction, Color.gray, 10f);
-            Debug.DrawRay(GetOriginOfRay(rayOriginObj, parentScale * collider.size.z/2), direction, Color.blue, 10f);
-            Debug.DrawRay(GetOriginOfRay(rayOriginObj, -parentScale * collider.size.z/2), direction, Color.magenta, 10f);
+            Debug.DrawRay(GetOriginOfRay(rayOriginObj, parentScale * ((collider.size.z / 2) + (collider.size.z / 5))), direction, Color.blue, 10f);
+            Debug.DrawRay(GetOriginOfRay(rayOriginObj, -parentScale * ((collider.size.z / 2) + (collider.size.z / 5))), direction, Color.magenta, 10f);
         }
 
 
@@ -84,12 +84,10 @@ public class ComputerControlledMoto : PlayableMoto
     {
         if (CheckFoWall(Side.Forward))
         {
-            Debug.Log("Turning because of wall");
             TurnSequence();
         }
         else if(Random.Range(1, 100) <= turnLuck)
         {
-            Debug.Log("Turning because of random");
             TurnSequence();
         }
         if(Random.Range(1, 100) <= boostLuck && !IsBoostOn)
@@ -101,7 +99,6 @@ public class ComputerControlledMoto : PlayableMoto
 
     private IEnumerator BoostSequence(float timeToWait)
     {
-        Debug.Log("BOOSTING !!!!!");
         ToggleBoost();
         yield return new WaitForSecondsRealtime(timeToWait);
         ToggleBoost();
@@ -111,7 +108,6 @@ public class ComputerControlledMoto : PlayableMoto
     {
 
         //Choose Direction
-        Debug.Log("Starting turn sequence");
 
         Side side = Side.Right;
         Side otherSide = Side.Left;
@@ -132,29 +128,22 @@ public class ComputerControlledMoto : PlayableMoto
 
         if (!CheckFoWall(side))
         {
-            Debug.Log("No wall on " + side);
             Turn(sideValue * 90);
         }
         else if (!CheckFoWall(otherSide))
         {
-            Debug.Log("No wall on other side : " + side);
-
             Turn(sideValue * -90);
         }
         else if (!CheckFoWall(Side.Forward))
         {
-            Debug.Log("No wall forward : " + side);
-
             return;
         }
         else
         {
-            Debug.Log("Wall Everywhere PANIK");
             bool trashBool; // I didn't succeed to make the out parameter optional, so I have to assign with *something*
             float sideDistance = GetDistanceFromWall(side, out trashBool);
             float otherSideDistance = GetDistanceFromWall(otherSide, out trashBool);
             float forwardDistance = GetDistanceFromWall(Side.Forward, out trashBool);
-            Debug.Log("Forward Distance : " + forwardDistance + " Side Distance : " + sideDistance + " other Side Distance : " + otherSideDistance);
 
 
 
@@ -205,7 +194,7 @@ public class ComputerControlledMoto : PlayableMoto
                 color = Color.green;
                 break;
         }
-        Vector3 direction = parentScale * (rayOriginObj.transform.forward * detectionRange + rayOriginObj.transform.forward * detectionOffset );
+        Vector3 direction = parentScale * ( rayOriginObj.transform.forward * detectionRange + rayOriginObj.transform.forward * detectionOffset );
 
         hasTouched = Physics.Raycast(GetOriginOfRay(rayOriginObj, offset), direction, out hit, direction.magnitude, layerMask);
         Debug.DrawRay(GetOriginOfRay(rayOriginObj, offset), direction, color, Time.deltaTime);

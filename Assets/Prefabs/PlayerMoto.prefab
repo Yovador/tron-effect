@@ -60,7 +60,7 @@ GameObject:
   - component: {fileID: 8901122802770847397}
   m_Layer: 6
   m_Name: PlayerMoto
-  m_TagString: Untagged
+  m_TagString: Moto
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
