@@ -11,6 +11,8 @@ public class AudioSync : MonoBehaviour
     float maxFreq;
     float freqPerBand;
     [SerializeField, Range(64, 8192)] int nbFreqBand = 512;
+    [SerializeField, Range(0, 0.1f)] float smoothingSpeed = 0.005f;
+    [SerializeField, Range(1, 2)] float smoothingStrength = 1.2f;
     [SerializeField] List<int> freqLimits = new List<int> { 100, 300, 600, 1200, 2400, 4800, 10000, 1000000 };
 
 
@@ -21,6 +23,9 @@ public class AudioSync : MonoBehaviour
     private float[] spectrum;
     public float[] Spectrum { get { return spectrum; } }
 
+
+    private float[] bufferSpectrum; 
+    private float[] smoothRatio;
 
     [SerializeField] private float[] displayableSpectrum;
     public float[] DisplayableSpectrum { get { return displayableSpectrum; } }
@@ -39,7 +44,8 @@ public class AudioSync : MonoBehaviour
         equalizedSpectrum = new float[freqLimits.Count];
         displayableSpectrum = new float[equalizedSpectrum.Length];
         maxSpectrumValues = new float[displayableSpectrum.Length];
-
+        bufferSpectrum = new float[displayableSpectrum.Length];
+        smoothRatio = new float[displayableSpectrum.Length];
     }
 
     void FixedUpdate()
@@ -75,6 +81,33 @@ public class AudioSync : MonoBehaviour
         }
     }
 
+    float[] SmoothEqualizer(float[] spectrum)
+    {
+        for (int i = 0; i < spectrum.Length; i++)
+        {
+
+            if(spectrum[i] > bufferSpectrum[i])
+            {
+                Debug.Log("SMOOTH");
+                bufferSpectrum[i] = spectrum[i];
+                smoothRatio[i] = smoothingSpeed;
+            }
+            else
+            {
+                bufferSpectrum[i] -= smoothRatio[i];
+                smoothRatio[i] *= smoothingStrength;
+                if (bufferSpectrum[i] < 0)
+                {
+                    bufferSpectrum[i] = 0;
+                }
+                Debug.Log("SMOOTH SPECTURM AAA " + bufferSpectrum[i] + " / " + spectrum[i]);
+
+            }
+            spectrum[i] = bufferSpectrum[i];
+        }
+        return spectrum;
+    }
+
     void UpdateDisplayableSpectrum()
     {
         UpdateSpectrum();
@@ -88,8 +121,9 @@ public class AudioSync : MonoBehaviour
             }
 
             displayableSpectrum[i] = equalizedSpectrum[i] / maxSpectrumValues[i];
-
         }
+
+        displayableSpectrum = SmoothEqualizer(displayableSpectrum);
     }
 
 

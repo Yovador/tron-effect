@@ -97,6 +97,7 @@ MonoBehaviour:
   neonIntensity: 15
   moveSpeed: 1
   boostValue: 3
+  deathEffectPrefab: {fileID: 979767788942951596, guid: aeaca09dbf8f899449f580dda3dc5fc6, type: 3}
 --- !u!65 &8901122802770847393
 BoxCollider:
   m_ObjectHideFlags: 0
