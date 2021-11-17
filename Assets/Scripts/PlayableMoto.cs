@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 [SelectionBase]
 public class PlayableMoto : MonoBehaviour
@@ -37,6 +38,8 @@ public class PlayableMoto : MonoBehaviour
     public float parentScale { get; set; }
     private Vector3 startingPos;
     private Quaternion startingRotation;
+    [SerializeField] GameObject deathEffectPrefab;
+    VisualEffect currentDeathEffect;
 
     private void Awake()
     {
@@ -46,6 +49,7 @@ public class PlayableMoto : MonoBehaviour
         UpdateTrailPath();
         startingPos = transform.localPosition;
         startingRotation = transform.localRotation;
+        currentDeathEffect = null;
     }
 
     protected virtual void Start()
@@ -87,6 +91,10 @@ public class PlayableMoto : MonoBehaviour
         StopAllCoroutines();
         isBoostOn = false;
         isAlive = false;
+        GameObject newDeathEffect = Instantiate(deathEffectPrefab, transform.position, Quaternion.identity);
+        currentDeathEffect = newDeathEffect.GetComponent<VisualEffect>();
+        currentDeathEffect.SetVector4("Color", new Vector4(neonColor.r, neonColor.g, neonColor.b, neonColor.a));
+        currentDeathEffect.SendEvent("OnDeath");
         GameManager.instance.EndRound();
 
     }
@@ -123,7 +131,20 @@ public class PlayableMoto : MonoBehaviour
         trailTurnPoint = new List<Vector3>();
         UpdateTrailPath();
         isAlive = true;
+        if(currentDeathEffect != null)
+        {
+            StartCoroutine(DestroyParticle());
+        }
 
+
+
+    }
+
+    private IEnumerator DestroyParticle()
+    {
+        yield return new WaitForSecondsRealtime(2f);
+        Destroy(currentDeathEffect.gameObject);
+        currentDeathEffect = null;
     }
 
     private void UpdateTrailPath()

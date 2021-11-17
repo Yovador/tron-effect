@@ -9,6 +9,7 @@ TagManager:
   - RaycastSource
   - ScoreValue
   - Moto
+  - deathEffect
   layers:
   - Default
   - TransparentFX
