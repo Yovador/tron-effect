@@ -1493,6 +1493,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nbFreqBand: 512
+  smoothingSpeed: 0.005
+  smoothingStrength: 1.2
   freqLimits: 640000002c01000058020000b004000060090000c01200001027000040420f00
   displayableSpectrum: []
 --- !u!82 &1009533011
@@ -3110,8 +3112,8 @@ MonoBehaviour:
   m_RigBaseGameObject: {fileID: 1831379870}
   m_CameraFloorOffsetObject: {fileID: 1752135900}
   m_CameraGameObject: {fileID: 1770789639}
-  m_RequestedTrackingOriginMode: 2
-  m_CameraYOffset: 1.36144
+  m_RequestedTrackingOriginMode: 1
+  m_CameraYOffset: 0
   m_TrackingSpace: 3
   m_TrackingOriginMode: -2147483648
 --- !u!4 &1831379872

@@ -8,16 +8,16 @@ using UnityEngine.VFX;
 public class PlayableMoto : MonoBehaviour
 {
     [SerializeField]
-    private Color NeonColor;
-    public Color neonColor
+    private Color neonColor;
+    public Color NeonColor
     {
         get
         {
-            return NeonColor;
+            return neonColor;
         }
         set
         {
-            NeonColor = neonColor;
+            neonColor = NeonColor;
         }
     }
 
@@ -29,7 +29,7 @@ public class PlayableMoto : MonoBehaviour
     [SerializeField]
     float boostValue;
 
-    bool isBoostOn = false;
+    protected bool isBoostOn = false;
     protected bool IsBoostOn { get { return isBoostOn; } }
     public bool isAlive { get; set; } = true;
     List<Vector3> trailTurnPoint = new List<Vector3>();
@@ -60,6 +60,12 @@ public class PlayableMoto : MonoBehaviour
     {
         Move();
         UpdateColor();
+        SetBoostInputWorkAround();
+    }
+
+    virtual protected void SetBoostInputWorkAround()
+    {
+
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -93,7 +99,7 @@ public class PlayableMoto : MonoBehaviour
         isAlive = false;
         GameObject newDeathEffect = Instantiate(deathEffectPrefab, transform.position, Quaternion.identity);
         currentDeathEffect = newDeathEffect.GetComponent<VisualEffect>();
-        currentDeathEffect.SetVector4("Color", new Vector4(neonColor.r, neonColor.g, neonColor.b, neonColor.a));
+        currentDeathEffect.SetVector4("Color", new Vector4(NeonColor.r, NeonColor.g, NeonColor.b, NeonColor.a));
         currentDeathEffect.SendEvent("OnDeath");
         GameManager.instance.EndRound();
 
@@ -118,7 +124,7 @@ public class PlayableMoto : MonoBehaviour
     {
         foreach (var obj in YovaUtilities.FindChildrenWithTag(gameObject, "hasNeon"))
         {
-            obj.GetComponent<MeshRenderer>().materials[1].SetColor("_EmissionColor", neonColor * neonIntensity);
+            obj.GetComponent<MeshRenderer>().materials[1].SetColor("_EmissionColor", NeonColor * neonIntensity);
         }
 
     }

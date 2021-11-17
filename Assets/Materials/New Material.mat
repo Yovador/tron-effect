@@ -7,9 +7,9 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: SplitMaterial
-  m_Shader: {fileID: -6465566751694194690, guid: 1910315cbdb478b4c8f9026f528a323c, type: 3}
-  m_ShaderKeywords: 
+  m_Name: New Material
+  m_Shader: {fileID: 108, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: _MAPPING_LATITUDE_LONGITUDE_LAYOUT _SUNDISK_NONE
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -44,7 +44,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 9e3238d3256e14044a3d2d21f83e0aac, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -63,6 +63,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Tex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -76,10 +80,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_7ccb26067ede49cc8c25a6743c792aeb: -0.04
-    - Vector1_8bad62de586c4b0f92d47ae4290be646: 10
     - _AlphaClip: 0
-    - _BassRatio: 0.46835315
+    - _AtmosphereThickness: 1.34
     - _Blend: 0
     - _BumpScale: 1
     - _ClearCoatMask: 0
@@ -90,38 +92,40 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _EnvironmentReflections: 1
+    - _Exposure: 0.65
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _HeightStart: 0.5
-    - _Intensity: 25
+    - _ImageType: 0
+    - _Layout: 0
+    - _Mapping: 1
     - _Metallic: 0
+    - _MirrorOnBack: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
-    - _PlayerRatio: -0.100000024
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Size: 20
+    - _Rotation: 0
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
+    - _SunDisk: 0
+    - _SunSize: 0.36
+    - _SunSizeConvergence: 1
     - _Surface: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Color_31d124bcfb24408bb5687486fe7bc86d: {r: 1, g: 1, b: 1, a: 0.29803923}
-    - Color_4e108c047c354987aba9aec61bc7d1ee: {r: 0.6323425, g: 0.9245283, b: 0.9047329, a: 0}
-    - Color_a296310d098344feb85e2d07ab7c1c21: {r: 0.9433962, g: 0.3646255, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _ComputerColor: {r: 1, g: 0.74509805, b: 0.23921569, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _PlayerColor: {r: 0.7783019, g: 0.992527, b: 1, a: 1}
-    - _Size: {r: 550, g: 550, b: 0, a: 0}
+    - _GroundColor: {r: 0.63479805, g: 0, b: 1, a: 1}
+    - _SkyTint: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
+    - _Tint: {r: 0.9006536, g: 0.9607843, b: 0.88235295, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &8903600057988840699
+--- !u!114 &6379824012885648056
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

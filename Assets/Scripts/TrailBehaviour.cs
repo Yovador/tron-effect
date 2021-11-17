@@ -15,7 +15,7 @@ public class TrailBehaviour : MonoBehaviour
     public GameObject anchoredMoto { get; set; }
     public List<Vector3> pointList { get; set; } = new List<Vector3>();
     private int currentAngle = 0;
-    //private List<Vector3> testList = new List<Vector3>() { new Vector3(1,0,0), new Vector3(1, 0, 0) };s
+
 
     [Obsolete("This variable has nos more use in the current state of the game. (yes I just wanted to try a deprecated method)")]
     private int evenlyPointNumber = 2;
@@ -118,7 +118,7 @@ public class TrailBehaviour : MonoBehaviour
 
     private void UpdateNeon(GameObject gameObject)
     {
-        gameObject.GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", anchoredMoto.GetComponent<PlayableMoto>().neonColor * neonTrailIntensity);
+        gameObject.GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", anchoredMoto.GetComponent<PlayableMoto>().NeonColor * neonTrailIntensity);
     }
 
     private void ResizeTrail(GameObject obj, Vector3 firstPoint, Vector3 secondPoint, bool rotate = true)
