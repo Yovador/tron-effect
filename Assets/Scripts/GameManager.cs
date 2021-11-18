@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -73,6 +74,7 @@ public class GameManager : MonoBehaviour
     {
         if(playerScore >= winCondition || computerScore >= winCondition)
         {
+            SceneManager.LoadScene("EndGame");
         }
     }
 
