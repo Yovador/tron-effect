@@ -98,7 +98,7 @@ Material:
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
-    - _PlayerRatio: -2.35
+    - _PlayerRatio: -0.19999999
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _Size: 20
