@@ -10,7 +10,7 @@ public class EndGameManager : MonoBehaviour
 
     private void Awake()
     {
-        textComponent = GetComponent<TMP_Text>();
+        textComponent = GetComponentInChildren<TMP_Text>();
     }
     // Start is called before the first frame update
     void Start()
@@ -32,6 +32,9 @@ public class EndGameManager : MonoBehaviour
         }
 
         textToDisplay += "Votre Score est " + playerscore;
+        Debug.Log(textToDisplay);
+
+        textComponent.text = textToDisplay;
     }
 
     public void Return()
