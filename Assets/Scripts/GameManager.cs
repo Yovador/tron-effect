@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     public int computerScore { get; set; } = 0;
     public AudioSync audioSync { get; set; }
 
+    [SerializeField] private int winCondition = 30;
+
     private void Awake()
     {
         if(instance == null)
@@ -63,7 +65,15 @@ public class GameManager : MonoBehaviour
         }
 
         Debug.Log("End round " + playerScore);
+        Endgame();
 
+    }
+
+    void Endgame()
+    {
+        if(playerScore >= winCondition || computerScore >= winCondition)
+        {
+        }
     }
 
 }
