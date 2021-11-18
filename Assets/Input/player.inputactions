@@ -7,9 +7,9 @@
             "actions": [
                 {
                     "name": "Boost",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "e4e1f98c-ac8f-481b-8ca1-83b5ccd21ed8",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Digital",
                     "processors": "",
                     "interactions": ""
                 },
@@ -59,7 +59,7 @@
                     "path": "<XRController>{LeftHand}/gripButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "XR",
                     "action": "Boost",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -70,7 +70,7 @@
                     "path": "<XRController>{RightHand}/gripButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "XR",
                     "action": "Boost",
                     "isComposite": false,
                     "isPartOfComposite": false
