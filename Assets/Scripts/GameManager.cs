@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class GameManager : MonoBehaviour
     public int playerScore { get; set; } = 0;
     public int computerScore { get; set; } = 0;
     public AudioSync audioSync { get; set; }
+
+    [SerializeField] private int winCondition = 30;
 
     private void Awake()
     {
@@ -63,7 +66,16 @@ public class GameManager : MonoBehaviour
         }
 
         Debug.Log("End round " + playerScore);
+        Endgame();
 
+    }
+
+    void Endgame()
+    {
+        if(playerScore >= winCondition || computerScore >= winCondition)
+        {
+            SceneManager.LoadScene("EndGame");
+        }
     }
 
 }

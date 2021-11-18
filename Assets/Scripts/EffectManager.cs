@@ -75,8 +75,6 @@ public class EffectManager : MonoBehaviour
             yield break;
         }
 
-
-
     }
 
     void UpdateBackgroundHeigth()
