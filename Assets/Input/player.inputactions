@@ -11,7 +11,7 @@
                     "id": "e4e1f98c-ac8f-481b-8ca1-83b5ccd21ed8",
                     "expectedControlType": "Digital",
                     "processors": "",
-                    "interactions": "Press(behavior=2)"
+                    "interactions": ""
                 },
                 {
                     "name": "TurnLeft",
@@ -1020,7 +1020,7 @@
                     "path": "<XRController>{LeftHand}/gripPressed",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Generic XR Controller",
+                    "groups": "Generic XR Controller;XR",
                     "action": "Select",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -1451,7 +1451,7 @@
                     "path": "<XRController>{RightHand}/gripPressed",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Generic XR Controller",
+                    "groups": "Generic XR Controller;XR",
                     "action": "Select",
                     "isComposite": false,
                     "isPartOfComposite": false

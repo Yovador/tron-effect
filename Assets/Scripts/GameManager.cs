@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     public int playerScore { get; set; } = 0;
     public int computerScore { get; set; } = 0;
     public AudioSync audioSync { get; set; }
-
+    public CharacterSelect characterSelect { get; set; }
     public enum GameStatusEnum { Menu, CharSelect, MainGame, EndGame }
     private GameStatusEnum gameStatus = GameStatusEnum.Menu;
     public GameStatusEnum GameStatus { get { return gameStatus; } set { gameStatus = value;} }
@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
         }
         Application.targetFrameRate = 60;
         audioSync = GetComponentInChildren<AudioSync>();
+        characterSelect = GetComponentInChildren<CharacterSelect>();
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
@@ -44,6 +45,7 @@ public class GameManager : MonoBehaviour
             case GameStatusEnum.Menu:
                 break;
             case GameStatusEnum.CharSelect:
+                characterSelect.DisplaySelectableCharacter();
                 break;
             case GameStatusEnum.MainGame:
                 StartGame();
@@ -57,12 +59,20 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
+
         foreach (var obj in GameObject.FindGameObjectsWithTag("Moto"))
         {
             motoStartPos.Add(obj);
         }
+
+        SwitchAudio();
+        SwitchCharacter();
     }
 
+    public void SwitchCharacter()
+    {
+        Debug.Log("SwitchCharacter " + characterSelect.SelectedCharacter.name);
+    }
 
     public void EndRound()
     {
@@ -100,12 +110,31 @@ public class GameManager : MonoBehaviour
 
     }
 
+    void SwitchAudio()
+    {
+        foreach (var audioSource in GetComponentsInChildren<AudioSource>())
+        {
+            if (audioSource.isPlaying)
+            {
+                audioSource.Stop();
+            }
+            else
+            {
+                audioSource.Play();
+            }
+        }
+    }
+
     void Endgame()
     {
         if(playerScore >= winCondition || computerScore >= winCondition)
         {
-            SceneManager.LoadScene("EndGame");
+            SwitchAudio();
             gameStatus = GameStatusEnum.EndGame;
+            playerScore = 0;
+            computerScore = 0;
+            motoStartPos = new List<GameObject>();
+            SceneManager.LoadScene("EndGame");
         }
     }
 

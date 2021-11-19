@@ -11,6 +11,9 @@ TagManager:
   - Moto
   - deathEffect
   - BEAM
+  - CharSelectBase
+  - SelectionPedestal
+  - SelectableCharacter
   layers:
   - Default
   - TransparentFX

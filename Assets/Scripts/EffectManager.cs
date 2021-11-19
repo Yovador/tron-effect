@@ -19,7 +19,7 @@ public class EffectManager : MonoBehaviour
     private void Awake()
     {
         backgroundMaterial.SetFloat("_PlayerRatio", 0);
-        backgroundMaterial.SetFloat("_BassRatio", 0);
+        backgroundMaterial.SetFloat("_BassRatio", 1);
         beamObject = GameObject.FindGameObjectWithTag("BEAM");
         beamObject.transform.localScale = new Vector3(0, beamObject.transform.localScale.y, beamObject.transform.localScale.z);
     }
@@ -31,8 +31,12 @@ public class EffectManager : MonoBehaviour
         {
             StartCoroutine(UpdateBackgroundWinRatio());
         }
-        UpdateBackgroundHeigth();
-        UpdateBeam();
+        if (GameManager.instance.GameStatus == GameManager.GameStatusEnum.MainGame)
+        {
+            UpdateBackgroundHeigth();
+            UpdateBeam();
+        }
+
     }
 
     IEnumerator UpdateBackgroundWinRatio()
