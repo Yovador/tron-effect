@@ -925,7 +925,7 @@ MonoBehaviour:
   m_text: Appuyersur la gachette pour tourner
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e61748cb5ca6f274f820fb9aefc0f491, type: 2}
-  m_sharedMaterial: {fileID: 7861720719966432755, guid: e61748cb5ca6f274f820fb9aefc0f491, type: 2}
+  m_sharedMaterial: {fileID: -8652093576574611927, guid: e61748cb5ca6f274f820fb9aefc0f491, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1307,7 +1307,7 @@ MonoBehaviour:
   m_text: "Yoann Bouquey\n\nR\xE9mi Andrez\n\nCiel Not"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e61748cb5ca6f274f820fb9aefc0f491, type: 2}
-  m_sharedMaterial: {fileID: 7861720719966432755, guid: e61748cb5ca6f274f820fb9aefc0f491, type: 2}
+  m_sharedMaterial: {fileID: -8652093576574611927, guid: e61748cb5ca6f274f820fb9aefc0f491, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1990,7 +1990,7 @@ MonoBehaviour:
   m_text: "Appuyer sur la gachette de c\xF4t\xE9 pour acc\xE9l\xE9rer"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e61748cb5ca6f274f820fb9aefc0f491, type: 2}
-  m_sharedMaterial: {fileID: 7861720719966432755, guid: e61748cb5ca6f274f820fb9aefc0f491, type: 2}
+  m_sharedMaterial: {fileID: -8652093576574611927, guid: e61748cb5ca6f274f820fb9aefc0f491, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2484,7 +2484,7 @@ MonoBehaviour:
   m_text: Chaque manette tourne dans 1 direction
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e61748cb5ca6f274f820fb9aefc0f491, type: 2}
-  m_sharedMaterial: {fileID: 7861720719966432755, guid: e61748cb5ca6f274f820fb9aefc0f491, type: 2}
+  m_sharedMaterial: {fileID: -8652093576574611927, guid: e61748cb5ca6f274f820fb9aefc0f491, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
