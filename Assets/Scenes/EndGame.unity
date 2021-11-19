@@ -582,19 +582,19 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 1953269719}
+    m_TransformParent: {fileID: 1978905184}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 23a97f58da010bc46a19d6e6733be487, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 23a97f58da010bc46a19d6e6733be487, type: 3}
       propertyPath: m_LocalScale.x
-      value: 24.934372
+      value: 71.87718
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 23a97f58da010bc46a19d6e6733be487, type: 3}
       propertyPath: m_LocalScale.y
-      value: 49.868744
+      value: 46.085934
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 23a97f58da010bc46a19d6e6733be487, type: 3}
       propertyPath: m_LocalScale.z
@@ -602,15 +602,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 23a97f58da010bc46a19d6e6733be487, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -3.17092
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 23a97f58da010bc46a19d6e6733be487, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -83.28582
+      value: -6.917978
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 23a97f58da010bc46a19d6e6733be487, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.08864239
+      value: -0.2313576
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 23a97f58da010bc46a19d6e6733be487, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1413,10 +1413,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Vous avez gagn\xE9 ! Votre score est XX"
+  m_text: "Vous avez gagn\xE9 ! \nVotre score est XX"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e61748cb5ca6f274f820fb9aefc0f491, type: 2}
+  m_sharedMaterial: {fileID: -8652093576574611927, guid: e61748cb5ca6f274f820fb9aefc0f491, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1476,7 +1476,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0.020866405, y: -0.7189636, z: -0.0214615, w: 0}
+  m_margin: {x: -12.686829, y: -0.7189636, z: -18.318062, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1615,7 +1615,6 @@ RectTransform:
   m_LocalScale: {x: 0.011286789, y: 0.005643394, z: 0.112867884}
   m_Children:
   - {fileID: 1826037553}
-  - {fileID: 438417579}
   - {fileID: 1978905184}
   m_Father: {fileID: 1970864860}
   m_RootOrder: 0
@@ -1688,9 +1687,10 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0.32}
   m_LocalScale: {x: 0.3469025, y: 1.0820817, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 438417579}
   m_Father: {fileID: 1953269719}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
