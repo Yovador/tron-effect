@@ -6,7 +6,6 @@ using UnityEngine;
 public class AudioSync : MonoBehaviour
 {
     AudioSource mainAudioSource;
-
     int sampleRate;
     float maxFreq;
     float freqPerBand;

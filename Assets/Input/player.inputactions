@@ -11,7 +11,7 @@
                     "id": "e4e1f98c-ac8f-481b-8ca1-83b5ccd21ed8",
                     "expectedControlType": "Digital",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "Press(behavior=2)"
                 },
                 {
                     "name": "TurnLeft",

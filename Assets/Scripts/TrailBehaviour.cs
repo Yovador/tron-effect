@@ -23,6 +23,7 @@ public class TrailBehaviour : MonoBehaviour
 
     private void Update()
     {
+        
         if (anchoredMoto.GetComponent<PlayableMoto>().hasStartedMoving)
         {
 
