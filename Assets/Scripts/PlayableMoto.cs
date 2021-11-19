@@ -17,7 +17,7 @@ public class PlayableMoto : MonoBehaviour
         }
         set
         {
-            neonColor = NeonColor;
+            neonColor = value;
         }
     }
 

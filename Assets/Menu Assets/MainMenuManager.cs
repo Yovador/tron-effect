@@ -14,6 +14,13 @@ public class MainMenuManager : MonoBehaviour
 
     public void PlayGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene("MainScene");
+        GameManager.instance.GameStatus = GameManager.GameStatusEnum.MainGame;
+    }
+
+    public void CharacterSelect()
+    {
+        SceneManager.LoadScene("PlayerCharacter");
+        GameManager.instance.GameStatus = GameManager.GameStatusEnum.CharSelect;
     }
 }
