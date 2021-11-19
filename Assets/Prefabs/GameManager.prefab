@@ -137,7 +137,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: d29ab264f1b1f8647b76d27cb7417690, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.307
   m_Pitch: 1
   Loop: 1
@@ -335,6 +335,7 @@ Transform:
   - {fileID: 6592877615571235129}
   - {fileID: 6592877616002716840}
   - {fileID: 6592877616462112113}
+  - {fileID: 6329667965586123981}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -395,7 +396,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: fbd2d5d4153b99440a4d430e35c02d6c, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
@@ -545,3 +546,52 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   sharedProfile: {fileID: 11400000, guid: cec430ac5120e054b94b6261f0bd7aad, type: 2}
+--- !u!1 &7945228001199868063
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6329667965586123981}
+  - component: {fileID: 2361318486000355356}
+  m_Layer: 0
+  m_Name: CharacterSelect
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6329667965586123981
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7945228001199868063}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6592877615988232499}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2361318486000355356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7945228001199868063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd6250a2991bc37498054d9bf763287a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playabaleCharacters:
+  - {fileID: 874195305368520122, guid: ee3264f1b12255246aa37a872e4823bf, type: 3}
+  - {fileID: 498018535575733060, guid: 6e7ec59a4ebab984eab5aeb43a1053ee, type: 3}
+  - {fileID: 8481941935090005251, guid: b52e42efb1cae8e42a03a448956cc2c9, type: 3}
+  selectableCharacterPrefab: {fileID: 5405693129487794580, guid: c9d2ed3d98ac8e84a862b80ecdb25c86, type: 3}
+  spaceBetweenChar: 1.3
