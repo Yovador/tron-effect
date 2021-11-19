@@ -14,6 +14,11 @@ TagManager:
   - CharSelectBase
   - SelectionPedestal
   - SelectableCharacter
+  - Chopper
+  - MotoChar
+  - BlueFalcon
+  - Model
+  - BasePlayer
   layers:
   - Default
   - TransparentFX

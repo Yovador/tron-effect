@@ -41,7 +41,7 @@ public class PlayableMoto : MonoBehaviour
     [SerializeField] GameObject deathEffectPrefab;
     VisualEffect currentDeathEffect;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         parentScale = transform.parent.localScale.x;
         trail = GetComponentInChildren<TrailBehaviour>();
@@ -102,7 +102,6 @@ public class PlayableMoto : MonoBehaviour
         currentDeathEffect.SetVector4("Color", new Vector4(NeonColor.r, NeonColor.g, NeonColor.b, NeonColor.a));
         currentDeathEffect.SendEvent("OnDeath");
         GameManager.instance.EndRound();
-
     }
 
 

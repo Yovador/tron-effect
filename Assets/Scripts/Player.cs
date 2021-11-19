@@ -6,6 +6,9 @@ using UnityEngine.InputSystem;
 public class Player : PlayableMoto
 {
     int boostButtonStatus = 0;
+    GameObject modelObj;
+
+
     public void OnTurnLeft()
     {
         Turn(-90);
@@ -34,5 +37,12 @@ public class Player : PlayableMoto
     {
 
         boostButtonStatus = (int)input.Get<float>();
+    }
+
+    public void SwitchModel()
+    {
+        modelObj = transform.Find("Model").gameObject;
+        Destroy(modelObj.transform.GetChild(0).gameObject);
+        Instantiate(GameManager.instance.characterSelect.SelectedCharacter, modelObj.transform);
     }
 }

@@ -72,6 +72,19 @@ public class GameManager : MonoBehaviour
     public void SwitchCharacter()
     {
         Debug.Log("SwitchCharacter " + characterSelect.SelectedCharacter.name);
+        foreach (var obj in motoStartPos)
+        {
+            if (obj.GetComponent<Player>() != null)
+            {
+                obj.GetComponent<Player>().SwitchModel();
+            }
+        }
+        GameObject model = GameObject.FindGameObjectWithTag("BasePlayer").gameObject;
+
+        Destroy(model.transform.GetChild(0).gameObject);
+        GameObject newModel = Instantiate(characterSelect.SelectedCharacter, model.transform);
+        newModel.transform.localScale *= 10;
+
     }
 
     public void EndRound()

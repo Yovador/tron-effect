@@ -16,7 +16,7 @@ public class CharacterSelect : MonoBehaviour
             for (int i = 0; i < playabaleCharacters.Count; i++)
             {
                 GameObject pChar = playabaleCharacters[i];
-                if(pChar.GetComponent<MeshRenderer>() == value.GetComponent<MeshRenderer>())
+                if(pChar.tag == value.tag)
                 {
                     Debug.Log("Setting char to " + value.name);
                     selectedCharacter = pChar;
@@ -30,12 +30,11 @@ public class CharacterSelect : MonoBehaviour
     private void Start()
     {
         SelectedCharacter = playabaleCharacters[0];
-        charSelectBase = GameObject.FindGameObjectWithTag("CharSelectBase");
-        DisplaySelectableCharacter();
     }
 
     public void DisplaySelectableCharacter()
     {
+        charSelectBase = GameObject.FindGameObjectWithTag("CharSelectBase");
         for (int i = 0; i < playabaleCharacters.Count; i++)
         {
             GameObject charac = playabaleCharacters[i];
