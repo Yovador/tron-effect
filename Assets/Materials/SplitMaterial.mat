@@ -79,7 +79,7 @@ Material:
     - Vector1_7ccb26067ede49cc8c25a6743c792aeb: -0.04
     - Vector1_8bad62de586c4b0f92d47ae4290be646: 10
     - _AlphaClip: 0
-    - _BassRatio: 0.27655998
+    - _BassRatio: 0.44604576
     - _Blend: 0
     - _BumpScale: 1
     - _ClearCoatMask: 0
@@ -98,7 +98,7 @@ Material:
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
-    - _PlayerRatio: -0.35000002
+    - _PlayerRatio: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _Size: 20
