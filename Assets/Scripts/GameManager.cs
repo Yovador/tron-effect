@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public AudioSync audioSync { get; set; }
 
     [SerializeField] private int winCondition = 30;
-
+    
     private void Awake()
     {
         if(instance == null)
