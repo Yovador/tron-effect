@@ -39,6 +39,8 @@ public class EndGameManager : MonoBehaviour
 
     public void Return()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 2);
+        SceneManager.LoadScene("Menu");
+        GameManager.instance.GameStatus = GameManager.GameStatusEnum.Menu;
+
     }
 }

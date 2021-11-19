@@ -87,7 +87,7 @@ public class AudioSync : MonoBehaviour
 
             if(spectrum[i] > bufferSpectrum[i])
             {
-                Debug.Log("SMOOTH");
+
                 bufferSpectrum[i] = spectrum[i];
                 smoothRatio[i] = smoothingSpeed;
             }
@@ -99,7 +99,7 @@ public class AudioSync : MonoBehaviour
                 {
                     bufferSpectrum[i] = 0;
                 }
-                Debug.Log("SMOOTH SPECTURM AAA " + bufferSpectrum[i] + " / " + spectrum[i]);
+
 
             }
             spectrum[i] = bufferSpectrum[i];

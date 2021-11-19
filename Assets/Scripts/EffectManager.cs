@@ -96,7 +96,6 @@ public class EffectManager : MonoBehaviour
     {
         float newValue = GameManager.instance.audioSync.DisplayableSpectrum[beamFreqToUse - 1] * maxBeamWidth;
 
-        Debug.Log("Update Beam : " + newValue);
 
         if(newValue < minBeamWidth)
         {
