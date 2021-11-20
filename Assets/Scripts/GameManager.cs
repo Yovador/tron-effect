@@ -43,6 +43,8 @@ public class GameManager : MonoBehaviour
         switch (gameStatus)
         {
             case GameStatusEnum.Menu:
+                playerScore = 0;
+                computerScore = 0;
                 break;
             case GameStatusEnum.CharSelect:
                 characterSelect.DisplaySelectableCharacter();
@@ -144,8 +146,6 @@ public class GameManager : MonoBehaviour
         {
             SwitchAudio();
             gameStatus = GameStatusEnum.EndGame;
-            playerScore = 0;
-            computerScore = 0;
             motoStartPos = new List<GameObject>();
             SceneManager.LoadScene("EndGame");
         }
