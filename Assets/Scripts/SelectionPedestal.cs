@@ -5,17 +5,20 @@ using UnityEngine;
 public class SelectionPedestal : MonoBehaviour
 {
     [SerializeField] float heigthObject = 0.5f;
-
-    private void OnTriggerEnter(Collider other)
+    GameObject currentDisplayed;
+    public void OnSelectedVehicle(GameObject obj)
     {
-        Debug.Log("SelectionPedestal " + other.tag + " / " + other.name);
-        if (other.tag == "SelectableCharacter")
-        {
-            GameObject newSelected = other.gameObject.transform.GetChild(0).GetChild(0).gameObject;
-            Debug.Log("SelectionPedestal in if " + newSelected.name);
-            GameManager.instance.characterSelect.SelectedCharacter = newSelected;
-            other.transform.position = transform.position + new Vector3(0, heigthObject, 0);
-        }
+        Destroy(currentDisplayed);
+        currentDisplayed = Instantiate(obj, transform.position, Quaternion.identity, transform.parent);
+        GameManager.instance.characterSelect.SelectedCharacter = currentDisplayed;
+        currentDisplayed.transform.position = transform.position + new Vector3(0, heigthObject, 0);
     }
 
+    private void Update()
+    {
+        if(currentDisplayed != null)
+        {
+            currentDisplayed.transform.eulerAngles += new Vector3(0, 1, 0);
+        }
+    }
 }

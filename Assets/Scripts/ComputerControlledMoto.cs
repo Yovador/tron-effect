@@ -140,6 +140,7 @@ public class ComputerControlledMoto : PlayableMoto
         }
         else
         {
+
             bool trashBool; // I didn't succeed to make the out parameter optional, so I have to assign with *something*
             float sideDistance = GetDistanceFromWall(side, out trashBool);
             float otherSideDistance = GetDistanceFromWall(otherSide, out trashBool);

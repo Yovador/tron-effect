@@ -19,6 +19,8 @@ TagManager:
   - BlueFalcon
   - Model
   - BasePlayer
+  - Button
+  - MenuMusic
   layers:
   - Default
   - TransparentFX
